@@ -33,7 +33,7 @@ class Fortune():
         self._dir = fortunes_dir
 
 
-    def pick(self, max_length=1000):
+    def pick(self, max_length=512):
         """
         Choose a random fortune. This is the meat of this class.
 
