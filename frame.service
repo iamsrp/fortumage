@@ -1,0 +1,13 @@
+[Unit]
+Description=Picture Frame
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/tmp
+ExecStart=/home/pi/src/frame.sh
+Restart=on-failure # or always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target
