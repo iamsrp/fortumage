@@ -27,6 +27,12 @@ The images produced by this are probably more weird than anything else. However,
 if you are looking for a talking point then you probably have one. The prompt
 which genrated the image is stored in the PNG metadata.
 
+Some of the more interesting images can be found in the `images` directory. The
+prompt text can be extracted using ImageMagick's `identify`, e.g.:
+```
+identify -verbose image/1687729918.png
+```
+
 ## TODO
 
 This was the result of an afternoon's work and is highly unpolished. It could be
