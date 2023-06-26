@@ -25,7 +25,7 @@ directory. The `frame.sh` script is a simple way of doing this using `feh`.
 
 The images produced by this are probably more weird than anything else. However,
 if you are looking for a talking point then you probably have one. The prompt
-which genrated the image is stored in the PNF metadata.
+which genrated the image is stored in the PNG metadata.
 
 ## TODO
 
