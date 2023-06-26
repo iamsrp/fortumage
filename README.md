@@ -1,6 +1,6 @@
 # Fortumage
 
-A simeple Python script which uses [Stable Diffusion](https://huggingface.co/runwayml/stable-diffusion-v1-5)
+A simple Python script which uses [Stable Diffusion](https://huggingface.co/runwayml/stable-diffusion-v1-5)
 to generate images based off random strings from fortune files. These can then
 be used as slideshow in a photoframe (e.g. on a Raspberry Pi).
 
