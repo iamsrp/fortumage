@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from   diffusers          import StableDiffusionPipeline
 from   PIL.PngImagePlugin import PngInfo
 
 import argh
@@ -144,10 +143,23 @@ class ImageMaker():
         :param model_id: The model identifier string.
         """
         self._model_id = model_id
-        self._pipe = StableDiffusionPipeline.from_pretrained(
-                         self._model_id,
-                         torch_dtype=torch.float16
-                     )
+        if 'runwayml/stable-diffusion' in model_id:
+            from diffusers import StableDiffusionPipeline
+            self._pipe = StableDiffusionPipeline.from_pretrained(
+                             self._model_id,
+                             torch_dtype=torch.float16
+                         )
+        elif 'stable-diffusion-xl' in model_id:
+            from diffusers import DiffusionPipeline
+            self._pipe = DiffusionPipeline.from_pretrained(
+                             model_id,
+                             torch_dtype=torch.float16,
+                             use_safetensors=True,
+                             variant="fp16"
+                         )
+        else:
+            raise ValueError("Unhandled model: %s" % (model_id,))
+
         self._pipe = self._pipe.to("cuda")
 
 
@@ -193,14 +205,17 @@ class ImageMaker():
           help="How long to sleep between generations")
 @argh.arg('--latest', '-l',
           help="Whether to create a 'latest' link")
+@argh.arg('--model', '-m',
+          help="The model ID")
 def main(fortunes_dir='/usr/share/games/fortunes',
          outdir='.',
          sleep=200,
-         latest=True):
+         latest=True,
+         model='runwayml/stable-diffusion-v1-5'):
     
     # Need these
     fortune = Fortune(fortunes_dir=fortunes_dir)
-    maker   = ImageMaker()
+    maker   = ImageMaker(model_id=model)
 
     if latest:
         latest_fn = os.path.join(outdir, 'latest.png')
@@ -209,6 +224,7 @@ def main(fortunes_dir='/usr/share/games/fortunes',
 
     # Loop forever
     while True:
+        LOG.info("")
         prompt = fortune.pick()
         if prompt:
             # We can make it
