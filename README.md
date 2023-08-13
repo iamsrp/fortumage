@@ -6,7 +6,7 @@ be used as slideshow in a photoframe (e.g. on a Raspberry Pi).
 
 ## Set up
 
-Something along rhe lines of:
+Something along the lines of:
 ```
 virtualenv diffusion
 . diffision/bin/activate
@@ -16,6 +16,8 @@ sudo apt install fortunes
 mkdir ~/fortumages
 ./fortumage.py -o ~/fortumages -s 30
 ```
+
+The instructions for using XL are sort of the same but different.
 
 In order to display the results remotely their directory can be NFS-exported and
 NFS-mounted on another machine, symlinking to the `latest.png` in the
